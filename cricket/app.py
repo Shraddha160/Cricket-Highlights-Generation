@@ -41,6 +41,7 @@ matplotlib.use('Agg')
 # Initialize Flask app
 app = Flask(__name__, static_folder='static')
 
+
 # Configuration
 app.config.update({
     'HIGHLIGHT_VIDEO': os.path.join('static', 'highlight.mp4'),
@@ -463,4 +464,5 @@ def process_video():
         return jsonify({"error": str(e), "status": "error"}), 500
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, threaded=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
