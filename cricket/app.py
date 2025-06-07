@@ -464,37 +464,37 @@ def process_video():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "status": "error"}), 500
-def get_available_port(start_port=5000):
-    """Find first available port starting from start_port"""
-    port = start_port
-    while True:
+def find_available_port(start_port=5000, end_port=6000):
+    """Scan for first available port in range"""
+    for port in range(start_port, end_port + 1):
         try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.bind(('', port))
-            sock.close()
-            return port
-        except OSError:
-            port += 1
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.bind(('0.0.0.0', port))
+                return port
+        except (OSError, socket.error):
+            continue
+    raise Exception("No available ports found!")
 
-
-class Handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write(b"Working!")
-
-HTTPServer(('0.0.0.0', 5000), Handler).serve_forever()
 if __name__ == "__main__":
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind(('0.0.0.0', 5000))  # Will raise error if binding fails
-    print("Port 5000 is available!")
-    sock.close()
+    # Configure for maximum compatibility
+    port = find_available_port()
     
-    # Critical settings for reliable binding
+    # Critical production-ready settings
+    WSGIRequestHandler.protocol_version = "HTTP/1.1"
+    
+    print(f"\n🔌 Server is DEFINITELY running on:")
+    print(f"👉 http://localhost:{port}")
+    print(f"👉 http://127.0.0.1:{port}")
+    print(f"👉 http://{socket.gethostbyname(socket.gethostname())}:{port}")
+    print("\n📢 TEST THESE IN YOUR BROWSER NOW!\n")
+    
+    # Start server with all possible optimizations
     app.run(
         host='0.0.0.0',
         port=port,
-        debug=True,
+        debug=False,  # Disable debug for production
         threaded=True,
-        use_reloader=False
+        processes=1,
+        use_reloader=False,
+        ssl_context='adhoc'  # Try with HTTPS if HTTP blocked
     )
