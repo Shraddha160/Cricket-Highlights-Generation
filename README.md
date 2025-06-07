@@ -1,7 +1,5 @@
 # Cricket-Highlights-Generation
-Here’s a clean and professional README intro you can use for your GitHub repo on the **Automated Cricket Highlights Generator**:
 
----
 
 ## 🏏 Automated Cricket Highlights Generator using OCR + ML
 
@@ -21,4 +19,3 @@ This project is a smart cricket highlights generation system that uses **OCR (Te
 
 ---
 
-Let me know if you want additional sections like **Installation**, **Usage**, **Screenshots**, or **Citations**.
