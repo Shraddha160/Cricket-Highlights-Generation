@@ -1,5 +1,6 @@
 import os
 import cv2
+import socket
 import pytesseract
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -462,7 +463,30 @@ def process_video():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "status": "error"}), 500
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))  # default to 10000 if PORT not set
-    app.run(host='0.0.0.0', port=port)
+ef get_available_port(start_port=5000):
+    """Find first available port starting from start_port"""
+    port = start_port
+    while True:
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.bind(('', port))
+            sock.close()
+            return port
+        except OSError:
+            port += 1
 
+if __name__ == "__main__":
+    port = get_available_port()
+    print(f"\n✅ Server is running on:")
+    print(f"http://localhost:{port}")
+    print(f"http://127.0.0.1:{port}")
+    print(f"http://{socket.gethostbyname(socket.gethostname())}:{port}\n")
+    
+    # Critical settings for reliable binding
+    app.run(
+        host='0.0.0.0',
+        port=port,
+        debug=True,
+        threaded=True,
+        use_reloader=False
+    )
