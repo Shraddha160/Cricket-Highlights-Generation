@@ -463,7 +463,7 @@ def process_video():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "status": "error"}), 500
-ef get_available_port(start_port=5000):
+def get_available_port(start_port=5000):
     """Find first available port starting from start_port"""
     port = start_port
     while True:
