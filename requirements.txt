@@ -2,8 +2,27 @@
 flask>=2.0.0,<3.0.0
 numpy>=1.21.0,<2.0.0
 opencv-python-headless>=4.5.0,<5.0.0  # Using headless version to avoid GUI dependencies
+werkzeug==2.3.7  # Required for WSGI server
 pytesseract>=0.3.8,<0.4.0
 python-dotenv>=0.19.0,<2.0.0
+
+# Network/Port Handling
+pyftpdlib==1.5.7  # Alternative FTP server
+python-socketio==5.8.0  # WebSocket fallback
+pyopenssl==23.2.0  # For HTTPS
+netifaces==0.11.0  # Network interface detection
+ifaddr==0.2.0  # IP address handling
+
+# Production Server Options
+waitress==2.1.2  # Recommended production WSGI server
+gunicorn==20.1.0  # Alternative production server
+eventlet==0.33.3  # Async server option
+
+# System Tools
+psutil==5.9.5  # Port scanning/process monitoring
+python-magic==0.4.27  # File type detection
+requests==2.31.0  # HTTP client testing
+
 
 # Video Processing with compatible versions
 yt-dlp>=2023.3.0,<2024.0.0
@@ -29,5 +48,9 @@ seaborn>=0.11.0,<0.13.0
 tqdm>=4.0.0,<5.0.0
 python-magic>=0.4.0,<1.0.0
 requests>=2.26.0,<3.0.0
+
+# System Compatibility
+pywin32==306  # Windows-specific (if applicable)
+pyserial==3.5  # Serial port fallback
 
 # Use --upgrade-strategy=only-if-needed when installing
