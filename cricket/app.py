@@ -476,11 +476,10 @@ def get_available_port(start_port=5000):
             port += 1
 
 if __name__ == "__main__":
-    port = get_available_port()
-    print(f"\n✅ Server is running on:")
-    print(f"http://localhost:{port}")
-    print(f"http://127.0.0.1:{port}")
-    print(f"http://{socket.gethostbyname(socket.gethostname())}:{port}\n")
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind(('0.0.0.0', 5000))  # Will raise error if binding fails
+    print("Port 5000 is available!")
+    sock.close()
     
     # Critical settings for reliable binding
     app.run(
