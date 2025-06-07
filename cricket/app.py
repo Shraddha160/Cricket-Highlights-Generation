@@ -462,22 +462,13 @@ def process_video():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "status": "error"}), 500
-def get_ip_address():
-    """Get the local IP address"""
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        # Doesn't need to be reachable
-        s.connect(('10.255.255.255', 1))
-        IP = s.getsockname()[0]
-    except Exception:
-        IP = '127.0.0.1'
-    finally:
-        s.close()
-    return IP
-
 if __name__ == "__main__":
-    host_ip = get_ip_address()
-    port = 5000
-    print(f"Starting server on http://{host_ip}:{port}")
-    app.run(host='0.0.0.0', port=port, debug=True)
+    # Try multiple common ports
+    for port in [5000, 8000, 8080, 3000]:
+        try:
+            print(f"Trying port {port}...")
+            app.run(host='0.0.0.0', port=port, debug=False)
+        except OSError as e:
+            print(f"Port {port} failed: {e}")
+            continue
 
