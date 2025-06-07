@@ -462,13 +462,7 @@ def process_video():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "status": "error"}), 500
-if __name__ == "__main__":
-    # Try multiple common ports
-    for port in [5000, 8000, 8080, 3000]:
-        try:
-            print(f"Trying port {port}...")
-            app.run(host='0.0.0.0', port=port, debug=False)
-        except OSError as e:
-            print(f"Port {port} failed: {e}")
-            continue
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 10000))  # default to 10000 if PORT not set
+    app.run(host='0.0.0.0', port=port)
 
