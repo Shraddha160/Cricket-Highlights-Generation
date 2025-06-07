@@ -1,6 +1,7 @@
 import os
 import cv2
 import socket
+from http.server import HTTPServer, BaseHTTPRequestHandler
 import pytesseract
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -475,6 +476,14 @@ def get_available_port(start_port=5000):
         except OSError:
             port += 1
 
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Working!")
+
+HTTPServer(('0.0.0.0', 5000), Handler).serve_forever()
 if __name__ == "__main__":
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.bind(('0.0.0.0', 5000))  # Will raise error if binding fails
