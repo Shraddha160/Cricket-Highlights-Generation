@@ -2,6 +2,8 @@ import os
 import cv2
 import socket
 from http.server import HTTPServer, BaseHTTPRequestHandler
+import sys
+from werkzeug.serving import WSGIRequestHandler
 import pytesseract
 import seaborn as sns
 import matplotlib.pyplot as plt
