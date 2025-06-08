@@ -1,28 +1,28 @@
-# Core Requirements
+# Core Requirements (Python 3.7+ compatible)
 flask==2.3.2
-werkzeug==2.3.7  # Required for WSGI server
+werkzeug==2.3.7
 python-dotenv==1.0.0
 
-# Network/Port Handling
-pyftpdlib==1.5.7  # Alternative FTP server
-python-socketio==5.8.0  # WebSocket fallback
-pyopenssl==23.2.0  # For HTTPS
-netifaces==0.11.0  # Network interface detection
-ifaddr==0.2.0  # IP address handling
+# Network/Port Handling (Cross-platform)
+pyftpdlib==1.5.7
+python-socketio==5.8.0
+pyopenssl==23.2.0
+netifaces==0.11.0
+ifaddr==0.2.0
 
-# Production Server Options
-waitress==2.1.2  # Recommended production WSGI server
-gunicorn==20.1.0  # Alternative production server
-eventlet==0.33.3  # Async server option
+# Production Servers
+waitress==2.1.2
+gunicorn==20.1.0
+eventlet==0.33.3
 
 # System Tools
-psutil==5.9.5  # Port scanning/process monitoring
-python-magic==0.4.27  # File type detection
-requests==2.31.0  # HTTP client testing
+psutil==5.9.5
+python-magic==0.4.27
+requests==2.31.0
 
-# Machine Learning (original project)
+# Machine Learning
 numpy==1.24.3
-opencv-python-headless==4.7.0.72  # Headless version
+opencv-python-headless==4.7.0.72
 pytesseract==0.3.10
 scikit-learn==1.3.0
 tensorflow==2.12.0
@@ -33,6 +33,6 @@ yt-dlp==2023.7.6
 moviepy==1.0.3
 ffmpeg-python==0.2.0
 
-# System Compatibility
-pywin32==306  # Windows-specific (if applicable)
-pyserial==3.5  # Serial port fallback
+# Windows-specific (conditional)
+pywin32==305 ; sys_platform == 'win32'
+pyserial==3.5
