@@ -1,18 +1,26 @@
-# Core
+# Core Application
 flask==2.2.5
 werkzeug==2.2.3
 python-dotenv==1.0.0
+setuptools==65.5.1  # Explicitly included for Vercel
 
-# ML Stack (Vercel-compatible versions)
-numpy==1.23.5  # Last version supporting Python 3.7-3.10
-tensorflow==2.12.0  # Last version with wide Python support
+# Machine Learning (Python 3.9 compatible)
+numpy==1.23.5
+tensorflow==2.12.0
 keras==2.12.0  # Must match TensorFlow version
-opencv-python-headless==4.6.0.66  # Lighter version
+scikit-learn==1.2.2
+opencv-python-headless==4.6.0.66  # Lighter version without GUI deps
 
 # Video Processing
 yt-dlp==2023.7.6
 moviepy==1.0.3
+ffmpeg-python==0.2.0
 
-# Additional
+# OCR and Utilities
 pytesseract==0.3.10
-scikit-learn==1.2.2
+pillow==9.5.0  # Required by pytesseract
+
+# Additional Dependencies
+requests==2.28.2
+psutil==5.9.5
+python-magic==0.4.27
