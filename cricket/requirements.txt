@@ -1,6 +1,10 @@
-Flask==2.2.3
-opencv-python==4.5.5.64
-yt-dlp==2023.3.4
-pytesseract==0.3.10
-matplotlib==3.7.1
-seaborn==0.12.2
+Flask
+opencv-python-headless
+pytesseract
+seaborn
+matplotlib
+numpy
+yt-dlp
+moviepy
+scikit-learn
+joblib
