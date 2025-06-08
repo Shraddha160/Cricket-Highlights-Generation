@@ -466,37 +466,8 @@ def process_video():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e), "status": "error"}), 500
-def find_available_port(start_port=5000, end_port=6000):
-    """Scan for first available port in range"""
-    for port in range(start_port, end_port + 1):
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.bind(('0.0.0.0', port))
-                return port
-        except (OSError, socket.error):
-            continue
-    raise Exception("No available ports found!")
+
 
 if __name__ == "__main__":
-    # Configure for maximum compatibility
-    port = find_available_port()
-    
-    # Critical production-ready settings
-    WSGIRequestHandler.protocol_version = "HTTP/1.1"
-    
-    print(f"\n🔌 Server is DEFINITELY running on:")
-    print(f"👉 http://localhost:{port}")
-    print(f"👉 http://127.0.0.1:{port}")
-    print(f"👉 http://{socket.gethostbyname(socket.gethostname())}:{port}")
-    print("\n📢 TEST THESE IN YOUR BROWSER NOW!\n")
-    
-    # Start server with all possible optimizations
-    app.run(
-        host='0.0.0.0',
-        port=port,
-        debug=False,  # Disable debug for production
-        threaded=True,
-        processes=1,
-        use_reloader=False,
-        ssl_context='adhoc'  # Try with HTTPS if HTTP blocked
-    )
+    port = int(os.environ.get("PORT", 5000))  # Render uses $PORT environment variable
+    app.run(host='0.0.0.0', port=port, threaded=True)
